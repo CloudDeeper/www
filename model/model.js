@@ -17,6 +17,7 @@ var plantSchema = new Schema({
   average_price: Number,
   average_quantity: Number,
   count: Number,
+  group: Number,
 });
 
 var Plant = mongoose.model('Plant', plantSchema);

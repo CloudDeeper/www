@@ -1,4 +1,5 @@
-var str = "../data/part-000";
+var str = "../best_clustering_result.csv";
+
 var fs = require('fs');
 for(var i = 0; i < 30; i++){
   if ( i < 10)

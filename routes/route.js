@@ -24,4 +24,11 @@ router.get('/api/:name', function(req, res) {
   
 });
 
+router.get('/group/:group', function(req, res) {
+  console.log('group ' + req.params.group);
+  Plant.find({group: req.params.group}, (err, plant) => {
+    res.json(plant);
+  });
+});
+
 module.exports = router;

@@ -595,6 +595,10 @@ var plantName = [
 ,"龍文蘭-龍文蘭"
 ,"龍眼-龍眼肉"
 ];
+
+$('.dropdown-button').pushpin({ top: $('.dropdown-button').offset().top });
+
+
 $('.dropdown-button').dropdown({
     inDuration: 300,
     outDuration: 225,
@@ -609,11 +613,11 @@ $('.dropdown-button').dropdown({
 for(var i = 0; i < plantName.length; i++){
   $("#dropdown1").append('<li><a href="/api/' + plantName[i] + '">' + plantName[i] + '</a></li>');
 }
-$("#dropdown1 li a").click(function (e){
-  e.preventDefault();
-  var newText = $(this).text();
+
+function onPlantClick(newText, href) {
+  $('#tag-list div').remove();
   $('.dropdown-button').text(newText);
-  $.ajax(this.href, {
+  $.ajax(href, {
     type: 'GET',
     data: {
       format: 'json'
@@ -639,7 +643,7 @@ $("#dropdown1 li a").click(function (e){
         var mul = d.average_price * d.average_quantity / 1000;
         prices_sold.push(mul);
         
-        console.log(d.average_price * d.average_quantity / 1000 + 'k');
+        // console.log(d.average_price * d.average_quantity / 1000 + 'k');
       });
 
       var options = {
@@ -679,13 +683,54 @@ $("#dropdown1 li a").click(function (e){
             }
           })
         );
+
+      var group = data[0].group;
+      // console.log('group ' + group);
+      // getGroup
+      $.ajax('group/' + group, {
+        type: 'GET',
+        data: {
+          format: 'json'
+        },
+        success: function(data) {
+          data = _.uniqBy(data, 'name');
+          data.map(function(d){
+            if(d.name != newText)
+              $('#tag-list').append('<div class="chip"><a href="/api/' + d.name   + '">' + d.name + '</a></div>');
+            
+
+          })
+        },
+        error: function(){
+          console.log("cant get group");
+        }
+      });
       
     },
     error: function() {
       console.log('cant get data');
     }
-  });
+  }); 
+}
+
+$("#dropdown1 li a").click(function (e){
+  e.preventDefault();
+  var newText = $(this).text();
+  var href = this.href;
+  onPlantClick(newText, href);
+
+
 });
+
+$(document).on('click', '#tag-list div a', function (e){
+    e.preventDefault();
+    var newText = $(this).text();
+    var href = this.href;
+    onPlantClick(newText, href);
+});
+
+
+
 
 /* chart */
 // new Chartist.Line('.ct-chart', {
