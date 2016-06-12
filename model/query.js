@@ -22,7 +22,8 @@ Plant.aggregate([
   ], (err, plants) => {
     
     plants.map( plant => {
-      console.log(plant._id.id);
+      if(plant.count == 53)
+        console.log(plant._id.id);
      
       //console.log(plant._id.id);
       // Plant.find({name: plant._id.id}, (err, data) => {
