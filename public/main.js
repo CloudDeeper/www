@@ -633,7 +633,7 @@ function onPlantClick(newText, href) {
       });
 
       data.map(function(d){
-        
+        console.log(d);
         var t = new Date(d.time);
         var m = t.getMonth() + 1
         labels.push(t.getFullYear() + '/' + m);
