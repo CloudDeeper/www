@@ -647,8 +647,8 @@ function onPlantClick(newText, href) {
       });
 
       var options = {
-        width: 2500,
-        //height: 200,
+        width: 1000,
+        height: 300,
         fullWidth: true,
         chartPadding: {
           right: 40
@@ -656,21 +656,21 @@ function onPlantClick(newText, href) {
         
       };
       new Chartist.Line('.ct-chart-price', {
-          labels: labels,
+          labels: null,
           series: [
             prices,
           ]
         }, options);
 
       new Chartist.Line('.ct-chart-sold', {
-          labels: labels,
+          labels: null,
           series: [
             sold,
           ]
         }, options);
 
       new Chartist.Line('.ct-chart-mult', {
-          labels: labels,
+          labels: null,
           series: [
             prices_sold,
           ]

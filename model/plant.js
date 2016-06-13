@@ -10,7 +10,7 @@ function parseDate(input) {
 }
 
 var str = "../data/part-000";
-for(var i = 1; i < 30; i++){
+for(var i = 0; i < 30; i++){
   var f_str;
   if ( i < 10)
     f_str = str +  '0' + i;
